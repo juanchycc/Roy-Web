@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: 'Bahar regular';
+    src: url('/fonts/Bahar Regular.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bahar regular';
+    src: url('/fonts/Bahar Regular.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bahar regular';
+    src: url('/fonts/Bahar Regular.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+html {
+    font-family: "Bahar regular", var(--font-fallback);
+}
