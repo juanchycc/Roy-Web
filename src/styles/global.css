@@ -27,3 +27,13 @@
 html {
     font-family: "Bahar regular", var(--font-fallback);
 }
+
+.desktop-header {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    header.desktop-header {
+        display: none !important;
+    }
+}

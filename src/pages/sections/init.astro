@@ -1,0 +1,131 @@
+---
+// No additional imports needed
+---
+
+<section id="inicio" class="relative flex min-h-screen w-full">
+    <div class="bg-images-container flex w-full h-full">
+        <div class="bg-image-left"></div>
+        <div class="bg-image-right"></div>
+    </div>
+
+    <div class="relative flex flex-col items-center p-8 w-full text-center">
+        <div class="absolute inset-0 flex flex-col w-full py-32">
+            <h1 class="main-title">ROY</h1>
+            <!-- Navigation Links -->
+            <div class="section-links">
+                <a href="#discografia">DISCOGRAFIA</a>
+                <a href="#shows">SHOWS</a>
+                <a href="#multimedia">MULTIMEDIA</a>
+                <a href="#bio">BIO</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener("scroll", () => {
+        const scrollPosition = window.scrollY; // Get the current scroll position
+        const blurValue = Math.min(scrollPosition / 100, 10); // Calculate blur value (max 10px)
+
+        // Apply the blur effect to both images
+        const bgImageLeft = document.querySelector(
+            ".bg-image-left",
+        ) as HTMLElement;
+        const bgImageRight = document.querySelector(
+            ".bg-image-right",
+        ) as HTMLElement;
+
+        if (bgImageLeft) {
+            bgImageLeft.style.filter = `blur(${blurValue}px)`;
+        }
+        if (bgImageRight) {
+            bgImageRight.style.filter = `blur(${blurValue}px)`;
+        }
+    });
+</script>
+
+<style>
+    .main-title {
+        text-decoration: none;
+        color: #0000e8;
+        font-weight: bold;
+        font-size: 8rem;
+        text-shadow: 2px 1px 2px #820b45;
+        padding: 0.3rem 0.8rem;
+        transition:
+            color 0.3s ease,
+            text-shadow 0.3s ease;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .section-links {
+        margin-top: -1rem;
+        display: flex;
+        justify-content: center;
+        gap: -0.4rem; /* Space between links */
+    }
+
+    .section-links a {
+        text-decoration: none;
+        color: #eeeeee;
+        font-weight: bold;
+        font-size: 1rem;
+        text-shadow: 0.3px 0.3px 1px rgba(255, 255, 255, 0.5);
+        padding: 0.3rem 0.8rem;
+        transition:
+            color 0.3s ease,
+            text-shadow 0.3s ease;
+        opacity: 0.7;
+    }
+
+    .section-links a:hover {
+        color: #0000e8;
+        opacity: 1;
+    }
+
+    /* Default styles for both images */
+    .bg-images-container {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1; /* Ensure the background is behind the content */
+    }
+
+    .bg-image-left,
+    .bg-image-right {
+        height: 100%;
+        width: 100%; /* Each image takes up half the width */
+        background-size: cover;
+        background-repeat: no-repeat;
+        filter: blur(2px); /* Initial blur */
+        -webkit-filter: blur(2px);
+        transition: filter 0.1s ease; /* Smooth transition for blur effect */
+    }
+
+    .bg-image-left {
+        background-image: url("/images/roy_left.jpg");
+        background-position: center left;
+    }
+
+    .bg-image-right {
+        background-image: url("/images/roy_right.jpg");
+        background-position: center right;
+    }
+
+    /* Media query for mobile devices (<768px) */
+    @media (max-width: 768px) {
+        .bg-image-left {
+            display: none !important;
+        }
+
+        .bg-image-right {
+            width: 100%; /* Make the right image take up the full width */
+            background-position: center; /* Center the image */
+        }
+    }
+</style>
