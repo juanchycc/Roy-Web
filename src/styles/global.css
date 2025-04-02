@@ -26,4 +26,5 @@
 
 html {
     font-family: "Bahar regular", var(--font-fallback);
+    scroll-behavior: smooth;
 }
