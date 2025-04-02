@@ -5,18 +5,16 @@ import Header from "../components/Header.astro";
 // sections
 import Init from "../pages/sections/init.astro";
 import Discography from "./sections/discography.astro";
+import Shows from "./sections/shows.astro";
+import Multimedia from "./sections/multimedia.astro";
+import Bio from "./sections/bio.astro";
 ---
 
 <Layout>
 	<Header />
 	<Init />
 	<Discography />
-	<section id="shows" style="height: 100vh; background-color: #181823;">
-	</section>
-	<section id="multimedia" style="height: 100vh; background-color: #181823;">
-		<h1>Section 4</h1>
-	</section>
-	<section id="bio" style="height: 100vh; background-color: #181823;">
-		<h1>Section 4</h1>
-	</section>
+	<Shows />
+	<Multimedia />
+	<Bio />
 </Layout>

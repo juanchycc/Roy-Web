@@ -28,3 +28,12 @@ html {
     font-family: "Bahar regular", var(--font-fallback);
     scroll-behavior: smooth;
 }
+
+.section-title {
+    font-family: "Bahar regular";
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #eeee;
+}
