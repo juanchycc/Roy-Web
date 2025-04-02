@@ -4,26 +4,28 @@ const albums = Object.entries(
 ).map(([path, module]) => {
     const fileName = path.split("/").pop()?.replace(".png", ""); // Extract the file name
     return {
-        title: fileName?.replace(/-/g, " ").toUpperCase(), // Convert the file name to a readable title
-        image: path, // Cast module to the correct type
+        title: fileName?.replace(/_/g, " ").toUpperCase(), // Convert the file name to a readable title
+        image: (module as { default: { src: string } }).default.src, // Access the `src` property for the image path
         link: `/discography/${fileName}`, // Generate a link based on the file name
     };
 });
 ---
 
-<section id="discography" class="discography-section">
+<section id="discografia" class="discography-section">
     <h2 class="section-title">Discografía</h2>
     <div class="cards-container">
         {
             albums.map((album) => (
-                <a href={album.link} class="card">
-                    <img
-                        src={album.image}
-                        alt={album.title}
-                        class="card-image"
-                    />
+                <div class="card-wrapper">
+                    <a href={album.link} class="card">
+                        <img
+                            src={album.image}
+                            alt={album.title}
+                            class="card-image"
+                        />
+                    </a>
                     <h3 class="card-title">{album.title}</h3>
-                </a>
+                </div>
             ))
         }
     </div>
@@ -33,53 +35,66 @@ const albums = Object.entries(
     .discography-section {
         padding: 2rem;
         background-color: #181823;
-        text-align: center;
+        text-align: start;
         height: 100vh;
     }
 
     .section-title {
+        font-family: "Bahar regular";
         font-size: 2rem;
         font-weight: bold;
+        margin-top: 1.5rem;
         margin-bottom: 1.5rem;
-        color: #333;
+        color: #eeee;
     }
 
     .cards-container {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1.5rem;
-        justify-items: center;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 2rem;
+        justify-items: left;
+    }
+
+    .card-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
     .card {
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         align-items: center;
         text-decoration: none;
-        background-color: #fff;
+        background-color: #181823;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         transition:
             transform 0.2s ease,
             box-shadow 0.2s ease;
+        width: 250px;
+        height: 250px;
     }
 
     .card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-2px);
         box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        border: 2px solid rgba(0, 0, 232, 0.3);
     }
 
     .card-image {
         width: 100%;
-        height: auto;
+        height: 100%;
         object-fit: cover;
     }
 
     .card-title {
-        font-size: 1.2rem;
+        font-family: "Bahar regular";
+        font-size: 1rem; /* Smaller font size */
         font-weight: bold;
-        margin: 0.5rem 0;
-        color: #333;
+        margin-top: 0.5rem; /* Space between card and title */
+        color: rgb(255, 253, 253, 0.4);
     }
 </style>
