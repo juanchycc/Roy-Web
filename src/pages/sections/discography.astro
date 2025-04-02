@@ -1,0 +1,85 @@
+---
+const albums = Object.entries(
+    import.meta.glob("/src/assets/discography/*.png", { eager: true }),
+).map(([path, module]) => {
+    const fileName = path.split("/").pop()?.replace(".png", ""); // Extract the file name
+    return {
+        title: fileName?.replace(/-/g, " ").toUpperCase(), // Convert the file name to a readable title
+        image: path, // Cast module to the correct type
+        link: `/discography/${fileName}`, // Generate a link based on the file name
+    };
+});
+---
+
+<section id="discography" class="discography-section">
+    <h2 class="section-title">Discografía</h2>
+    <div class="cards-container">
+        {
+            albums.map((album) => (
+                <a href={album.link} class="card">
+                    <img
+                        src={album.image}
+                        alt={album.title}
+                        class="card-image"
+                    />
+                    <h3 class="card-title">{album.title}</h3>
+                </a>
+            ))
+        }
+    </div>
+</section>
+
+<style>
+    .discography-section {
+        padding: 2rem;
+        background-color: #181823;
+        text-align: center;
+        height: 100vh;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        color: #333;
+    }
+
+    .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        justify-items: center;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 0.5rem 0;
+        color: #333;
+    }
+</style>
