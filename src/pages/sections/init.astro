@@ -65,7 +65,7 @@
         margin-top: -1rem;
         display: flex;
         justify-content: center;
-        gap: -0.4rem; /* Space between links */
+        gap: -0.4rem; /* Reduce space between links */
     }
 
     .section-links a {
@@ -87,6 +87,7 @@
     }
 
     .bg-images-container {
+        background-color: #000;
         display: flex;
         width: 100%;
         height: 100%;
@@ -108,13 +109,13 @@
     .bg-image-left {
         background-image: url("/images/roy_left.jpg");
         background-position: center left;
-        background-color: #000; /* Fallback color */
+        background-color: #000;
     }
 
     .bg-image-right {
         background-image: url("/images/roy_right.jpg");
         background-position: center right;
-        background-color: #000; /* Fallback color */
+        background-color: #000;
     }
 
     /* Overlay for smooth transition */
@@ -149,6 +150,10 @@
 
         .bg-overlay {
             display: none; /* Hide overlay on mobile */
+        }
+
+        .section-links {
+            display: none;
         }
     }
 </style>
