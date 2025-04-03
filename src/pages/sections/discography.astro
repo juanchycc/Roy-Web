@@ -1,14 +1,32 @@
 ---
+const albumPaths = {
+    469: "https://open.spotify.com/intl-es/album/5yI1IEnEUGYY5XDmtoWlrl",
+    ardiente_deseo:
+        "https://open.spotify.com/intl-es/album/7CMMAkhoElhzZ28vt5XO5w",
+    contempla_más_allá_de_mi_carne:
+        "https://open.spotify.com/intl-es/album/02zIc3YetVew50gAGJOe4u",
+    cuánto_vale_el_mundo_sin_ti:
+        "https://open.spotify.com/intl-es/album/2Yxf0lX1h3APH9gKMuPPQp",
+    peligros_y_jazmines:
+        "https://open.spotify.com/intl-es/track/0dDPHuII3u35L7TNtfwHlw",
+    tu_y_yo: "https://open.spotify.com/intl-es/album/3OSGfFRhHu2Rm1uccUbEut",
+};
+
 const albums = Object.entries(
     import.meta.glob("/src/assets/discography/*.png", { eager: true }),
 ).map(([path, module]) => {
-    const fileName = path.split("/").pop()?.replace(".png", ""); // Extract the file name
+    const fileName = path.split("/").pop()?.replace(".png", "");
     return {
-        title: fileName?.replace(/_/g, " ").toUpperCase(), // Convert the file name to a readable title
-        image: (module as { default: { src: string } }).default.src, // Access the `src` property for the image path
-        link: `/discography/${fileName}`, // Generate a link based on the file name
+        title: fileName?.replace(/_/g, " ").toUpperCase() || "ALBUM",
+        image: (module as { default: { src: string } }).default.src,
+        redirect: albumPaths[fileName as keyof typeof albumPaths] || "#",
     };
 });
+
+// Helper function to get the href for an album
+function getAlbumHref(title: string): string {
+    return albumPaths[title as keyof typeof albumPaths] || "#";
+}
 ---
 
 <section id="discografia" class="discography-section">
@@ -17,7 +35,12 @@ const albums = Object.entries(
         {
             albums.map((album) => (
                 <div class="card-wrapper">
-                    <a href={album.link} class="card">
+                    <a
+                        href={album.redirect}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="card"
+                    >
                         <img
                             src={album.image}
                             alt={album.title}
@@ -33,13 +56,13 @@ const albums = Object.entries(
 
 <style>
     .discography-section {
-        padding: 2rem;
+        padding: 4rem 2rem;
         background-color: #181823;
         text-align: start;
-        height: 100vh;
     }
 
     .cards-container {
+        padding-top: 4rem;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 2rem;
