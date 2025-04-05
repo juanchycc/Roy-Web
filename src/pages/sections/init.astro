@@ -1,11 +1,29 @@
 ---
-
+import { Image } from "astro:assets";
+import LeftImage from "../../assets/main/roy_left.jpg";
+import RightImage from "../../assets/main/roy_right.jpg";
 ---
 
 <section id="inicio" class="relative flex min-h-screen w-full">
     <div class="bg-images-container flex w-full h-full">
-        <div class="bg-image-left"></div>
-        <div class="bg-image-right"></div>
+        <!-- <div class="bg-image-left"></div>
+        <div class="bg-image-right"></div> -->
+        <Image
+            class="bg-image-left"
+            src={LeftImage}
+            alt="Roy Background Left"
+            loading="eager"
+            quality="high"
+            format="webp"
+        />
+        <Image
+            class="bg-image-right"
+            src={RightImage}
+            alt="Roy Background Right"
+            loading="eager"
+            quality="high"
+            format="webp"
+        />
         <div class="bg-overlay"></div>
     </div>
 
