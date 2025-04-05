@@ -1,29 +1,53 @@
 ---
 import { Image } from "astro:assets";
 
-const albumPaths = {
-    469: "https://open.spotify.com/intl-es/album/5yI1IEnEUGYY5XDmtoWlrl",
-    ardiente_deseo:
-        "https://open.spotify.com/intl-es/album/7CMMAkhoElhzZ28vt5XO5w",
-    contempla_más_allá_de_mi_carne:
-        "https://open.spotify.com/intl-es/album/02zIc3YetVew50gAGJOe4u",
-    cuánto_vale_el_mundo_sin_ti:
-        "https://open.spotify.com/intl-es/album/2Yxf0lX1h3APH9gKMuPPQp",
-    peligros_y_jazmines:
-        "https://open.spotify.com/intl-es/track/0dDPHuII3u35L7TNtfwHlw",
-    tu_y_yo: "https://open.spotify.com/intl-es/album/3OSGfFRhHu2Rm1uccUbEut",
-};
+//TODO: ase collection to avoid this imports
 
-const albums = Object.entries(
-    import.meta.glob("/src/assets/discography/*.png", { eager: true }),
-).map(([path, module]) => {
-    const fileName = path.split("/").pop()?.replace(".png", "");
-    return {
-        title: fileName?.replace(/_/g, " ").toUpperCase() || "ALBUM",
-        image: path,
-        redirect: albumPaths[fileName as keyof typeof albumPaths] || "#",
-    };
-});
+import cuatroSeisNueveImage from "../../assets/discography/469.png";
+import ardienteDeseoImage from "../../assets/discography/ardiente_deseo.png";
+import contemplaMasAllaDeMiCarneImage from "../../assets/discography/contempla_más_allá_de_mi_carne.png";
+import cuantoValeElMundoSinTiImage from "../../assets/discography/cuánto_vale_el_mundo_sin_ti.png";
+import peligrosYJazminesImage from "../../assets/discography/peligros_y_jazmines.png";
+import tuYYoImage from "../../assets/discography/tu_y_yo.png";
+
+const albums = [
+    {
+        title: "469",
+        image: cuatroSeisNueveImage,
+        redirect:
+            "https://open.spotify.com/intl-es/album/5yI1IEnEUGYY5XDmtoWlrl",
+    },
+    {
+        title: "ARDIENTE DESEO",
+        image: ardienteDeseoImage,
+        redirect:
+            "https://open.spotify.com/intl-es/album/7CMMAkhoElhzZ28vt5XO5w",
+    },
+    {
+        title: "CONTEMPLA MÁS ALLÁ DE MI CARNE",
+        image: contemplaMasAllaDeMiCarneImage,
+        redirect:
+            "https://open.spotify.com/intl-es/album/02zIc3YetVew50gAGJOe4u",
+    },
+    {
+        title: "CUÁNTO VALE EL MUNDO SIN TI",
+        image: cuantoValeElMundoSinTiImage,
+        redirect:
+            "https://open.spotify.com/intl-es/album/2Yxf0lX1h3APH9gKMuPPQp",
+    },
+    {
+        title: "PELIGROS Y JAZMINES",
+        image: peligrosYJazminesImage,
+        redirect:
+            "https://open.spotify.com/intl-es/track/0dDPHuII3u35L7TNtfwHlw",
+    },
+    {
+        title: "TÚ Y YO",
+        image: tuYYoImage,
+        redirect:
+            "https://open.spotify.com/intl-es/album/3OSGfFRhHu2Rm1uccUbEut",
+    },
+];
 ---
 
 <section id="discografia" class="discography-section">
