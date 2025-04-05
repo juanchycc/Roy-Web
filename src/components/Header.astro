@@ -3,6 +3,26 @@
 import Instagram from "../assets/social_media/instagram.png";
 import Youtube from "../assets/social_media/youtube.png";
 import Spotify from "../assets/social_media/spotify.png";
+import { Image } from "astro:assets";
+
+// Social media links and icons
+const socialMedia = [
+    {
+        href: "https://open.spotify.com/intl-es/artist/7mUDQIezPylOofwcgb74zx",
+        src: Spotify,
+        alt: "Spotify",
+    },
+    {
+        href: "https://www.instagram.com/roy.animales/",
+        src: Instagram,
+        alt: "Instagram",
+    },
+    {
+        href: "https://www.youtube.com/channel/UCwEDNmnqzrlqU1j6tYxXpEg",
+        src: Youtube,
+        alt: "YouTube",
+    },
+];
 ---
 
 <header class="desktop-header">
@@ -25,28 +45,23 @@ import Spotify from "../assets/social_media/spotify.png";
     </div>
 
     <!-- Social Media Icons -->
+    <!-- Social Media Icons -->
     <div class="social-icons">
-        <a
-            href="https://open.spotify.com/intl-es/artist/7mUDQIezPylOofwcgb74zx"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            <img src={Spotify.src} alt="Spotify" />
-        </a>
-        <a
-            href="https://www.instagram.com/roy.animales/"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            <img src={Instagram.src} alt="Instagram" />
-        </a>
-        <a
-            href="https://www.youtube.com/channel/UCwEDNmnqzrlqU1j6tYxXpEg"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            <img src={Youtube.src} alt="YouTube" />
-        </a>
+        {
+            socialMedia.map((icon) => (
+                <a href={icon.href} target="_blank" rel="noopener noreferrer">
+                    <Image
+                        src={icon.src}
+                        alt={icon.alt}
+                        format="webp"
+                        width={30}
+                        height={30}
+                        quality="mid"
+                        loading="eager"
+                    />
+                </a>
+            ))
+        }
     </div>
 </header>
 

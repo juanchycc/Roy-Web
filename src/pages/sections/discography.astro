@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+
 const albumPaths = {
     469: "https://open.spotify.com/intl-es/album/5yI1IEnEUGYY5XDmtoWlrl",
     ardiente_deseo:
@@ -18,15 +20,10 @@ const albums = Object.entries(
     const fileName = path.split("/").pop()?.replace(".png", "");
     return {
         title: fileName?.replace(/_/g, " ").toUpperCase() || "ALBUM",
-        image: (module as { default: { src: string } }).default.src,
+        image: path,
         redirect: albumPaths[fileName as keyof typeof albumPaths] || "#",
     };
 });
-
-// Helper function to get the href for an album
-function getAlbumHref(title: string): string {
-    return albumPaths[title as keyof typeof albumPaths] || "#";
-}
 ---
 
 <section id="discografia" class="discography-section">
@@ -41,10 +38,15 @@ function getAlbumHref(title: string): string {
                         rel="noopener noreferrer"
                         class="card"
                     >
-                        <img
+                        <Image
+                            class="card-image"
                             src={album.image}
                             alt={album.title}
-                            class="card-image"
+                            loading="lazy"
+                            format="webp"
+                            width={220}
+                            height={220}
+                            quality="mid"
                         />
                     </a>
                     <h3 class="card-title">{album.title}</h3>
@@ -61,7 +63,7 @@ function getAlbumHref(title: string): string {
     }
 
     .cards-container {
-        padding-top: 4rem;
+        padding-top: 2rem;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 2rem;
@@ -104,10 +106,9 @@ function getAlbumHref(title: string): string {
     }
 
     .card-title {
-        font-family: "Bahar regular";
-        font-size: 1rem; /* Smaller font size */
-        font-weight: bold;
-        margin-top: 0.5rem; /* Space between card and title */
+        font-size: 1rem;
+        font-weight: regular;
+        margin-top: 0.5rem;
         color: rgb(255, 253, 253, 0.4);
     }
 </style>
