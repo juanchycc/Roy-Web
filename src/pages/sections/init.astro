@@ -1,28 +1,30 @@
 ---
 import { Image } from "astro:assets";
-import LeftImage from "../../assets/main/roy_left.jpg";
-import RightImage from "../../assets/main/roy_right.jpg";
+import LeftImage from "@/assets/main/roy_left.webp";
+import RightImage from "@/assets/main/roy_right.webp";
 ---
 
 <section id="inicio" class="relative flex min-h-screen w-full">
     <div class="bg-images-container flex w-full h-full">
-        <!-- <div class="bg-image-left"></div>
-        <div class="bg-image-right"></div> -->
         <Image
             class="bg-image-left"
             src={LeftImage}
             alt="Roy Background Left"
             loading="eager"
-            quality="high"
+            quality="max"
             format="webp"
+            width={1920}
+            height={1080}
         />
         <Image
             class="bg-image-right"
             src={RightImage}
             alt="Roy Background Right"
             loading="eager"
-            quality="high"
+            quality="max"
             format="webp"
+            width={1920}
+            height={1080}
         />
         <div class="bg-overlay"></div>
     </div>
@@ -44,7 +46,7 @@ import RightImage from "../../assets/main/roy_right.jpg";
 <script>
     document.addEventListener("scroll", () => {
         const scrollPosition = window.scrollY; // Get the current scroll position
-        const blurValue = Math.min(scrollPosition / 100, 10); // Calculate blur value (max 10px)
+        const blurValue = Math.min(scrollPosition / 100, 10) + 2; // Calculate blur value (max 10px)
 
         // Apply the blur effect to both images
         const bgImageLeft = document.querySelector(
@@ -117,10 +119,12 @@ import RightImage from "../../assets/main/roy_right.jpg";
 
     .bg-image-left,
     .bg-image-right {
-        height: 100%;
         width: 50%;
-        background-size: cover;
+        height: 100%;
+        background-size: contain;
         background-repeat: no-repeat;
+        filter: blur(2px);
+        object-fit: cover;
     }
 
     .bg-image-left {
@@ -159,7 +163,7 @@ import RightImage from "../../assets/main/roy_right.jpg";
         }
 
         .bg-image-right {
-            width: 100%; /* Make the right image take up the full width */
+            width: 100%; Make the right image take up the full width
             background-position: center; /* Center the image */
         }
 

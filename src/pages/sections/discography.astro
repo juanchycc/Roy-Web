@@ -3,12 +3,12 @@ import { Image } from "astro:assets";
 
 //TODO: ase collection to avoid this imports
 
-import cuatroSeisNueveImage from "../../assets/discography/469.png";
-import ardienteDeseoImage from "../../assets/discography/ardiente_deseo.png";
-import contemplaMasAllaDeMiCarneImage from "../../assets/discography/contempla_más_allá_de_mi_carne.png";
-import cuantoValeElMundoSinTiImage from "../../assets/discography/cuánto_vale_el_mundo_sin_ti.png";
-import peligrosYJazminesImage from "../../assets/discography/peligros_y_jazmines.png";
-import tuYYoImage from "../../assets/discography/tu_y_yo.png";
+import cuatroSeisNueveImage from "@/assets/discography/469.png";
+import ardienteDeseoImage from "@/assets/discography/ardiente_deseo.png";
+import contemplaMasAllaDeMiCarneImage from "@/assets/discography/contempla_más_allá_de_mi_carne.png";
+import cuantoValeElMundoSinTiImage from "@/assets/discography/cuánto_vale_el_mundo_sin_ti.png";
+import peligrosYJazminesImage from "@/assets/discography/peligros_y_jazmines.png";
+import tuYYoImage from "@/assets/discography/tu_y_yo.png";
 
 const albums = [
     {
@@ -68,9 +68,9 @@ const albums = [
                             alt={album.title}
                             loading="lazy"
                             format="webp"
-                            width={220}
-                            height={220}
-                            quality="mid"
+                            width={500}
+                            height={500}
+                            quality="high"
                         />
                     </a>
                     <h3 class="card-title">{album.title}</h3>
