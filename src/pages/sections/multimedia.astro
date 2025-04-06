@@ -1,5 +1,28 @@
+---
+import { Image } from "astro:assets";
+// Importar imágenes dinámicamente
+const images = import.meta.glob("../../assets/multimedia/*.jpg", {
+    eager: true,
+    query: "?url",
+});
+---
+
 <section id="multimedia" class="multimedia-section">
     <h2 class="section-title">MULTIMEDIA</h2>
+    <div class="images-container">
+        {
+            Object.entries(images).map(([path, url]) => (
+                <Image
+                    src={url.default}
+                    alt={`Imagen multimedia ${path.split("/").pop()?.replace(".jpg", "")}`}
+                    loading="lazy"
+                    width={200}
+                    height={200}
+                    class="multimedia-image"
+                />
+            ))
+        }
+    </div>
 </section>
 
 <style>
@@ -7,5 +30,25 @@
         padding: 4rem 2rem;
         background-color: #181823;
         text-align: start;
+    }
+
+    .images-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        justify-items: center;
+    }
+
+    .multimedia-image {
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+    }
+
+    .multimedia-image:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
     }
 </style>
