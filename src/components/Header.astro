@@ -46,7 +46,6 @@ const socialMedia = [
     </div>
 
     <!-- Social Media Icons -->
-    <!-- Social Media Icons -->
     <div class="social-icons">
         {
             socialMedia.map((icon) => (
@@ -178,6 +177,10 @@ const socialMedia = [
         display: flex;
         gap: 0.8rem;
         margin-right: 10px;
+        position: absolute; /* Position the icons separately */
+        top: 1rem; /* Adjust as needed */
+        right: 1rem; /* Adjust as needed */
+        z-index: 1001; /* Ensure they are above other elements */
     }
 
     .social-icons a img {
@@ -207,6 +210,12 @@ const socialMedia = [
 
         .menu-toggle {
             display: flex;
+        }
+
+        .social-icons {
+            position: fixed; /* Keep icons fixed in mobile view */
+            top: 1rem;
+            right: 1rem;
         }
     }
 </style>
