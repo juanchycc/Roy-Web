@@ -10,46 +10,56 @@ const images = import.meta.glob("../../assets/multimedia/*.jpg", {
 
 <section id="multimedia" class="multimedia-section">
     <h2 class="section-title">MULTIMEDIA</h2>
-    <div class="images-container">
+
+    <div class="images-row">
         {
             Object.entries(images).map(([path, url]) => (
                 <Image
                     src={url.default}
                     alt={`Imagen multimedia ${path.split("/").pop()?.replace(".jpg", "")}`}
                     loading="lazy"
-                    width={200}
+                    width={300}
                     height={200}
                     class="multimedia-image"
+                    format="webp"
                 />
             ))
         }
     </div>
+
+    <style>
+        .images-row {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 1rem 0;
+            scroll-snap-type: x mandatory;
+            scroll-padding: 50%;
+        }
+
+        .multimedia-section {
+            padding: 4rem 2rem;
+            background-color: #181823;
+            text-align: start;
+        }
+
+        .multimedia-image {
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                opacity 0.3s ease;
+            object-fit: contain;
+            width: 600px; /* Tamaño inicial */
+            height: 400px;
+            scroll-snap-align: center; /* Centrar la imagen en el scroll */
+        }
+
+        .multimedia-image:hover {
+            transform: scale(1.2); /* Agrandar al pasar el mouse */
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+    </style>
 </section>
-
-<style>
-    .multimedia-section {
-        padding: 4rem 2rem;
-        background-color: #181823;
-        text-align: start;
-    }
-
-    .images-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1rem;
-        justify-items: center;
-    }
-
-    .multimedia-image {
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition:
-            transform 0.3s ease,
-            box-shadow 0.3s ease;
-    }
-
-    .multimedia-image:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-    }
-</style>
