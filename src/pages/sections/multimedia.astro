@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
-// Importar imágenes dinámicamente
+
+// Importar las imágenes de la seccion multimedia
 const images = import.meta.glob("../../assets/multimedia/*.jpg", {
     eager: true,
     query: "?url",

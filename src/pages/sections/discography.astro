@@ -1,49 +1,40 @@
 ---
-import { Image } from "astro:assets";
+import AlbumCard from "@/components/albumCard.astro";
 
-//TODO: ase collection to avoid this imports
+// Import images for the discography section
+const albums = import.meta.glob("../../assets/discography/*.png", {
+    eager: true,
+    query: "?url",
+});
 
-import cuatroSeisNueveImage from "@/assets/discography/469.png";
-import ardienteDeseoImage from "@/assets/discography/ardiente_deseo.png";
-import contemplaMasAllaDeMiCarneImage from "@/assets/discography/contempla_más_allá_de_mi_carne.png";
-import cuantoValeElMundoSinTiImage from "@/assets/discography/cuánto_vale_el_mundo_sin_ti.png";
-import peligrosYJazminesImage from "@/assets/discography/peligros_y_jazmines.png";
-import tuYYoImage from "@/assets/discography/tu_y_yo.png";
-
-const albums = [
+const albumsUrl = [
     {
         title: "469",
-        image: cuatroSeisNueveImage,
         redirect:
             "https://open.spotify.com/intl-es/album/5yI1IEnEUGYY5XDmtoWlrl",
     },
     {
-        title: "ARDIENTE DESEO",
-        image: ardienteDeseoImage,
+        title: "ardiente_deseo",
         redirect:
             "https://open.spotify.com/intl-es/album/7CMMAkhoElhzZ28vt5XO5w",
     },
     {
-        title: "CONTEMPLA MÁS ALLÁ DE MI CARNE",
-        image: contemplaMasAllaDeMiCarneImage,
+        title: "contempla_más_allá_de_mi_carne",
         redirect:
             "https://open.spotify.com/intl-es/album/02zIc3YetVew50gAGJOe4u",
     },
     {
-        title: "CUÁNTO VALE EL MUNDO SIN TI",
-        image: cuantoValeElMundoSinTiImage,
+        title: "cuánto_vale_el_mundo_sin_ti",
         redirect:
             "https://open.spotify.com/intl-es/album/2Yxf0lX1h3APH9gKMuPPQp",
     },
     {
-        title: "PELIGROS Y JAZMINES",
-        image: peligrosYJazminesImage,
+        title: "peligros_y_jazmines",
         redirect:
             "https://open.spotify.com/intl-es/track/0dDPHuII3u35L7TNtfwHlw",
     },
     {
-        title: "TÚ Y YO",
-        image: tuYYoImage,
+        title: "tu_y_yo",
         redirect:
             "https://open.spotify.com/intl-es/album/3OSGfFRhHu2Rm1uccUbEut",
     },
@@ -54,28 +45,23 @@ const albums = [
     <h2 class="section-title">DISCOGRAFIA</h2>
     <div class="cards-container">
         {
-            albums.map((album) => (
-                <div class="card-wrapper">
-                    <a
-                        href={album.redirect}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="card"
-                    >
-                        <Image
-                            class="card-image"
-                            src={album.image}
-                            alt={album.title}
-                            loading="lazy"
-                            format="webp"
-                            width={500}
-                            height={500}
-                            quality="high"
-                        />
-                    </a>
-                    <h3 class="card-title">{album.title}</h3>
-                </div>
-            ))
+            Object.entries(albums).map(([path, url]) => {
+                const fileName = path.split("/").pop()?.replace(".png", "");
+                const album = albumsUrl.find(
+                    (album) => album.title === fileName,
+                );
+                return (
+                    <AlbumCard
+                        href={album?.redirect || "#"}
+                        src={url.default}
+                        alt={fileName || "Album"}
+                        title={
+                            fileName?.replaceAll("_", " ").toUpperCase() ||
+                            "ALBUM"
+                        }
+                    />
+                );
+            })
         }
     </div>
 </section>
@@ -92,47 +78,5 @@ const albums = [
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 2rem;
         justify-items: center;
-    }
-
-    .card-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .card {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        background-color: #181823;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        transition:
-            transform 0.2s ease,
-            box-shadow 0.2s ease;
-        width: 250px;
-        height: 250px;
-    }
-
-    .card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-        border: 2px solid rgba(0, 0, 232, 0.3);
-    }
-
-    .card-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .card-title {
-        font-size: 1rem;
-        font-weight: regular;
-        margin-top: 0.5rem;
-        color: rgb(255, 253, 253, 0.4);
     }
 </style>
