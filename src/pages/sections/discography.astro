@@ -2,7 +2,7 @@
 import AlbumCard from "@/components/albumCard.astro";
 
 // Import images for the discography section
-const albums = import.meta.glob("../../assets/discography/*.png", {
+const albums = import.meta.glob("../../assets/discography/*.webp", {
     eager: true,
     query: "?url",
 });
@@ -46,7 +46,7 @@ const albumsUrl = [
     <div class="cards-container">
         {
             Object.entries(albums).map(([path, url]) => {
-                const fileName = path.split("/").pop()?.replace(".png", "");
+                const fileName = path.split("/").pop()?.replace(".webp", "");
                 const album = albumsUrl.find(
                     (album) => album.title === fileName,
                 );
